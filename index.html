@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedaçãoMoon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #a855f7;
+  --primary-dark: #7e22ce;
+  --primary-light: #d8b4fe;
+  --secondary: #1e1e1e;
+  --secondary-light: #2a2a2a;
+  --background: #0f0f0f;
+  --background-light: #1a1a1a;
+  --card: #1f1f1f;
+  --card-hover: #292929;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #a855f7;
+  --success: #4ade80;
+  --error: #f87171;
+  --warning: #facc15;
+  --border: #3f3f3f;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow-lg: rgba(0, 0, 0, 0.6);
+  --glow: rgba(168, 85, 247, 0.4);
+  --pulse-glow: rgba(168, 85, 247, 0.6);
+}
+
+body {
+  background: linear-gradient(135deg, var(--background), var(--background-light));
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+button {
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(135deg, var(--primary), #fff);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #fff, var(--primary-light));
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.card-header h1,
+.subtitle {
+  color: var(--text-accent);
+}
+
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 25px var(--shadow);
+  max-width: 500px;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background-color: var(--background-light);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+footer {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+.Notificacao {
+  background: var(--card);
+  border-left: 5px solid var(--primary);
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  color: var(--text-primary);
+}
+
+.Notificacao h3 {
+  color: var(--primary);
+}
+
+.modal-content {
+  background: var(--background-light);
+  padding: 2rem;
+  border-radius: 16px;
+  color: var(--text-primary);
+}
+
+
+input, button, .form-card, .modal-content {
+  font-family: 'Inter', sans-serif;
+  box-shadow: none;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-light);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-light);
+            border-radius: 10px;
+            border: 2px solid var(--background-light);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, var(--background-light) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            padding: 0 20px 20px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(64, 64, 64, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            opacity: 0.7;
+            animation: backgroundPulse 15s infinite alternate ease-in-out;
+        }
+
+        .main-header {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .container {
+            max-width: 520px;
+            width: 100%;
+            
+            margin: auto; 
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background-color: transparent;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px var(--glow);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.8s ease-out;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .logo:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 16px 50px var(--glow);
+        }
+
+.takis-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  padding: 8px;
+  border-radius: 18px;
+}
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            display: none; 
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-top: 8px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        
+        #scamWarning {
+            color: var(--error);
+            background-color: rgba(245, 101, 101, 0.1);
+            border: 1px solid var(--error);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(245, 101, 101, 0.3);
+        }
+        #scamWarning .fas {
+            color: var(--error);
+        }
+
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            15% { transform: rotate(-5deg); }
+            30% { transform: rotate(5deg); }
+            45% { transform: rotate(-3deg); }
+            60% { transform: rotate(3deg); }
+            75% { transform: rotate(-1deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+
+        .form-card {
+            background: var(--card);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 25px 70px var(--shadow-lg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            isolation: isolate;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: lineGlow 3s infinite alternate;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+            animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 18px 22px;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            font-size: 17px;
+            background: var(--background-light);
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: inherit;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 5px var(--glow), inset 0 2px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        input:hover:not(:focus) {
+            border-color: var(--secondary-light);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .input-container::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(-50%);
+        }
+
+        input:focus + .input-container::after {
+            width: 100%;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 18px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            z-index: 10;
+            font-size: 1.1rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 36px;
+        }
+
+        button {
+            padding: 18px 26px;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 0; 
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.8s ease-out;
+            z-index: 1; 
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button i,
+        button span { 
+            z-index: 2; 
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 6px 25px rgba(81, 11, 155, 0.4);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 35px rgba(81, 11, 155, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-light);
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .main-header .btn-back {
+            background: transparent;
+            color: var(--text-primary);
+            border: none;
+            margin-top: 0;
+            padding: 10px 15px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+
+        .main-header .btn-back:hover {
+            background: var(--secondary-light);
+            border-color: transparent;
+            transform: translateY(-2px) translateX(-3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0) !important;
+            box-shadow: none !important;
+        }
+
+        button:disabled {
+            background: var(--secondary);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(18px);
+            z-index: 1000;
+            animation: fadeIn 0.4s ease forwards;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 70px var(--shadow-lg);
+            animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--primary-light), var(--primary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 28px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .task-info {
+            margin-bottom: 28px;
+            padding: 24px;
+            background: var(--background-light);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-info p {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .task-info strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .progress-container {
+            margin: 28px 0;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--background-light);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 6px;
+        }
+
+        .time-remaining {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .close-modal {
+            background: var(--secondary-light);
+            color: var(--text-primary);
+            width: 100%;
+            margin-top: 24px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .close-modal:hover {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.4);
+        }
+
+        .task-list-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 45vh;
+            margin-bottom: 24px;
+            padding-right: 12px;
+        }
+
+        .task-list-item {
+            display: flex;
+            align-items: center;
+            background: var(--background-light);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-list-item:hover {
+            background: var(--secondary-light);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .task-list-item input[type="radio"] {
+            margin-right: 18px;
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            border-radius: 6px;
+            min-width: 22px;
+        }
+
+        .task-list-item label {
+            flex-grow: 1;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .task-list-item.redacao {
+            border-left: 6px solid var(--warning);
+        }
+
+        .task-list-item.redacao label {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .task-selection-modal .button-group {
+            margin-top: 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .notifications-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 14px;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .Notificacao {
+            background: var(--card);
+            border-left: 5px solid var(--primary);
+            padding: 18px 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 35px var(--shadow);
+            animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            pointer-events: auto;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .notifications-container .Notificacao {
+            flex-shrink: 0;
+        }
+
+        .Notificacao.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .Notificacao:hover {
+            transform: translateX(-6px);
+            box-shadow: 0 15px 45px var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .Notificacao.fadeOut {
+            animation: fadeOutRight 0.5s ease forwards;
+        }
+
+        .Notificacao h3 {
+            font-size: 17px;
+            margin-bottom: 0;
+            color: var(--primary);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .Notificacao p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(120px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(60px) scale(0.9);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 var(--pulse-glow);
+            }
+            50% {
+                box-shadow: 0 0 0 15px transparent;
+            }
+        }
+
+        @keyframes backgroundPulse {
+            0% {
+                background-image:
+                    radial-gradient(circle at 20% 50%, var(--glow) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(64, 64, 64, 0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+            }
+            100% {
+                background-image:
+                    radial-gradient(circle at 25% 55%, var(--glow) 0%, transparent 55%),
+                    radial-gradient(circle at 75% 25%, rgba(64, 64, 64, 0.25) 0%, transparent 55%),
+                    radial-gradient(circle at 45% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 55%);
+            }
+        }
+
+        @keyframes lineGlow {
+            0% {
+                background: linear-gradient(90deg, transparent, var(--primary), transparent);
+                box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary-light);
+            }
+            50% {
+                background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+                box-shadow: 0 0 10px var(--primary-light), 0 0 20px var(--primary);
+            }
+            100% {
+                background: linear-gradient(90deg, transparent, var(--primary), transparent);
+                box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary-light);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0 16px 16px 16px;
+            }
+
+            .container {
+                padding: 0;
+                min-height: auto;
+                margin-top: 75px;
+            }
+
+            .card-header {
+                margin-bottom: 25px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+                border-radius: 18px;
+            }
+
+            .takis-image {
+                padding: 6px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.05rem;
+            }
+
+            .scam-warning {
+                font-size: 0.95rem;
+                padding: 14px 20px;
+            }
+
+            .form-card {
+                padding: 28px;
+                border-radius: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 22px;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="number"] {
+                padding: 16px 18px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            button {
+                padding: 16px 22px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .time-inputs {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .notifications-container {
+                width: calc(100% - 32px);
+                right: 16px;
+                left: 16px;
+                bottom: 16px;
+                max-height: 60vh;
+                gap: 10px;
+            }
+
+            .Notificacao {
+                padding: 16px 20px;
+                border-radius: 12px;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 30px;
+                border-radius: 20px;
+            }
+
+            .modal h2 {
+                font-size: 1.7rem;
+            }
+
+            .task-list-item {
+                padding: 12px 16px;
+                border-radius: 10px;
+            }
+
+            .task-list-item input[type="radio"] {
+                width: 20px;
+                height: 20px;
+                min-width: 20px;
+            }
+
+            .main-header .btn-back {
+                font-size: 0.95rem;
+                padding: 9px 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0 12px 12px 12px;
+            }
+
+            .container {
+                margin-top: 65px;
+            }
+
+            .card-header {
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                border-radius: 16px;
+            }
+
+            .takis-image {
+                padding: 5px;
+                border-radius: 14px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .scam-warning {
+                font-size: 0.85rem;
+                padding: 12px 18px;
+            }
+
+            .form-card {
+                padding: 24px;
+                border-radius: 18px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="number"] {
+                padding: 14px 16px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+
+            button {
+                padding: 14px 18px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+
+            .button-group {
+                gap: 12px;
+                margin-top: 28px;
+            }
+
+            .notifications-container {
+                width: calc(100% - 24px);
+                right: 12px;
+                left: 12px;
+                bottom: 12px;
+            }
+
+            .Notificacao {
+                padding: 14px 18px;
+                border-radius: 10px;
+            }
+
+            .modal-content {
+                width: 98%;
+                padding: 24px;
+                border-radius: 18px;
+            }
+
+            .modal h2 {
+                font-size: 1.5rem;
+            }
+
+            .task-list-item {
+                padding: 10px 14px;
+                border-radius: 8px;
+            }
+
+            .task-list-item input[type="radio"] {
+                width: 18px;
+                height: 18px;
+                min-width: 18px;
+            }
+
+            .main-header .btn-back {
+                font-size: 0.85rem;
+                padding: 7px 12px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            button:hover::before,
+            .logo:hover::before {
+                display: none;
+            }
+
+            input:hover:not(:focus) {
+                border-color: var(--border);
+            }
+
+            button:hover,
+            .logo:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .Notificacao:hover {
+                transform: translateX(0);
+                border-color: var(--border);
+            }
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .profile-menu-sidebar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .profile-menu-sidebar:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar-profile-image {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 8px rgba(34, 6, 109, 0.3);
+        }
+
+        .profile-menu-sidebar i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+#donationModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+}
+
+#donationModal .modal-box {
+  background: linear-gradient(145deg, #1a1a1a, #111011);
+  border-radius: 20px;
+  padding: 40px 30px;
+  color: #fff;
+  width: 90%;
+  max-width: 460px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.3);
+  position: relative;
+  animation: slideUp 0.5s ease forwards;
+  border: 1px solid #2e2e2e;
+}
+
+#donationModal .modal-box h2 {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+#donationModal .modal-box p {
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+#donationModal .btn-donate,
+#donationModal .btn-close {
+  display: inline-block;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+#donationModal .btn-donate {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  color: white;
+  margin-right: 12px;
+}
+
+#donationModal .btn-donate:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #b87cff, #8e4de3);
+}
+
+#donationModal .btn-close {
+  background: #2a2a2a;
+  color: #ccc;
+  border: 1px solid #444;
+}
+
+#donationModal .btn-close:hover {
+  background: #3a3a3a;
+  color: white;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+    </style>
+</head>
+<body>
+        </button>
+    </header>
+    <div class="container">
+        <div class="form-card">
+            <div class="card-header">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img src="img/logo.png" alt="Logo MoonRedação" class="takis-image">
+                    </div>
+                    <h1>Moon Redações</h1>
+                </div>
+                <p id="scamWarning" class="text-error">
+                    <i class="fas fa-exclamation-triangle"></i> Serviço totalmente gratis, não pague por isso.
+                </p>
+
+                <p class="subtitle">Gerencie suas redações facilmente.</p>
+            </div>
+            <form id="redacaoManagerForm">
+                <div class="form-group">
+                    <label for="ra">(RA + dígito + estado)</label>
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            id="ra"
+                            required
+                            placeholder="Ex.: 1234567890sp">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha da sala do futuro</label>
+                    <div class="input-container">
+                        <input
+                            type="password"
+                            id="senha"
+                            required
+                            placeholder="Ex.: Aluno_2025">
+                        <i class="password-toggle fas fa-eye" id="togglePassword"></i>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="button" id="searchRedacaoBtn" class="btn-primary">
+                        <i class="fas fa-search"></i> <span>Buscar Redação</span>
+                    </button>
+                    <a href="https://discord.gg/MWqKv5JRWG" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: var(--card); padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); margin-top: 16px; color: var(--text-primary); text-decoration: none; transition: all 0.2s ease;">
+  <img src="img/discord.png" alt="Discord" style="width: 24px; height: 24px;" />
+  <span>Entrar no Discord Moon Scripts</span>
+</a>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            Desenvolvido por <a target="_blank">crimsonstraus & biscurim</a>
+        </div>
+    </div>
+    <div class="modal" id="redacaoSelectionModal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="redacaoSelectionModalTitle"><i class="fas fa-pencil-alt"></i> Selecionar Redação</h2>
+            <div class="task-list-container" id="redacaoListContainer">
+            </div>
+            <div class="button-group">
+                <button type="button" id="selectRedacaoBtn" class="btn-primary">
+                    <i class="fas fa-check-circle"></i> <span>Fazer Redação Selecionada</span>
+                </button>
+                <button type="button" id="closeRedacaoSelectionModalBtn" class="close-modal">
+                    <i class="fas fa-times-circle"></i> <span>Fechar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="progressModal" style="display: none;">
+        <div class="modal-content" style="text-align: center; padding: 30px;">
+            <div class="spinner" style="border: 4px solid rgba(255, 255, 255, 0.3); border-top: 4px solid var(--primary); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px auto;"></div>
+            <h2 id="progressModalMessage" style="font-size: 1.8rem; color: var(--text-primary); margin-bottom: 0;">Processando...</h2>
+        </div>
+    </div>
+
+    <div class="notifications-container" id="notificationsContainer"></div>
+
+
+    <script>
+
+    const securityConfig = {
+    disableSecurity: false,
+    blockedKeys: { F12: true, I: true, C: true, J: true, U: true },
+    keyCodeMap: { 123: 'F12', 73: 'I', 67: 'C', 74: 'J', 85: 'U' }
+};
+
+document.addEventListener('contextmenu', (e) => {
+    if (!securityConfig.disableSecurity) e.preventDefault();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (securityConfig.disableSecurity) return;
+    const key = securityConfig.keyCodeMap[e.keyCode] || e.key;
+    if (key === 'F12' || (e.ctrlKey && e.shiftKey && securityConfig.blockedKeys[key])) e.preventDefault();
+    if (e.ctrlKey && key === 'U') e.preventDefault();
+});
+
+const consoleProtection = new Error();
+Object.defineProperties(consoleProtection, {
+    toString: {
+        value() {
+            if ((new Error()).stack.includes('toString@')) location.reload();
+        }
+    },
+    message: {
+        get() { location.reload(); }
+    }
+});
+console.log(consoleProtection);
+
+
+function showNotification(title, message, type = 'info', duration = 3000) {
+            const container = document.getElementById('notificationsContainer');
+            const notification = document.createElement('div');
+            notification.className = 'Notificacao';
+            let borderColor = 'var(--primary)';
+            if (type === 'success') borderColor = 'var(--success)';
+            if (type === 'error') borderColor = 'var(--error)';
+            if (type === 'warning') borderColor = 'var(--warning)';
+            notification.style.borderLeftColor = borderColor;
+            notification.innerHTML = `
+                <h3>${title}</h3>
+                <p>${message}</p>
+            `;
+            container.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            notification.addEventListener('click', () => {
+                removeNotification(notification);
+            });
+            setTimeout(() => {
+                removeNotification(notification);
+            }, duration);
+        }
+        function removeNotification(notification) {
+            if (notification && notification.parentNode) {
+                notification.classList.remove('show');
+                notification.classList.add('fadeOut');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 400);
+            }
+        }
+        let isTouch = false;
+        document.addEventListener('touchstart', () => { isTouch = true; });
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+            input.addEventListener('touchstart', function() {
+                this.style.fontSize = '16px';
+            });
+        });
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('senha');
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!isTouch) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.2);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                }
+            });
+        });
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        function addSwipeSupport() {
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+            document.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.Notificacao')) {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                }
+            });
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging && e.target.closest('.Notificacao')) {
+                    currentX = e.touches[0].clientX;
+                    const diff = currentX - startX;
+                    if (diff > 0) {
+                        e.target.closest('.Notificacao').style.transform = `translateX(${diff}px)`;
+                        e.target.closest('.Notificacao').style.opacity = Math.max(0.3, 1 - diff / 200);
+                    }
+                }
+            });
+            document.addEventListener('touchend', (e) => {
+                if (isDragging && e.target.closest('.Notificacao')) {
+                    const notification = e.target.closest('.Notificacao');
+                    const diff = currentX - startX;
+                    if (diff > 100) {
+                        removeNotification(notification);
+                    } else {
+                        notification.style.transform = '';
+                        notification.style.opacity = '';
+                    }
+                }
+                isDragging = false;
+            });
+        }
+        addSwipeSupport();
+
+        function Atividade(titulo, atividade) {
+            const div = document.createElement("div");
+            div.className = "Notificacao";
+            const h3 = document.createElement("h3");
+            h3.textContent = titulo;
+            const p = document.createElement("p");
+            p.textContent = atividade;
+            div.appendChild(h3);
+            div.appendChild(p);
+            notificationsContainer.appendChild(div);
+            setTimeout(() => {
+                div.classList.add('show');
+            }, 10);
+            setTimeout(() => {
+                div.classList.remove('show');
+                div.classList.add('fadeOut');
+                div.addEventListener("animationend", () => {
+                    div.remove();
+                }, { once: true });
+            }, 5000);
+        }
+        const senhaInput = document.getElementById("senha");
+        const raInput = document.getElementById("ra");
+        const redacaoManagerForm = document.getElementById('redacaoManagerForm');
+        const searchRedacaoBtn = document.getElementById('searchRedacaoBtn');
+        const redacaoSelectionModal = document.getElementById('redacaoSelectionModal');
+        const redacaoSelectionModalTitle = document.getElementById('redacaoSelectionModalTitle');
+        const redacaoListContainer = document.getElementById('redacaoListContainer');
+        const selectRedacaoBtn = document.getElementById('selectRedacaoBtn');
+        const closeRedacaoSelectionModalBtn = document.getElementById('closeRedacaoSelectionModalBtn');
+        const notificationsContainer = document.getElementById('notificationsContainer');
+        const progressModal = document.getElementById('progressModal');
+        const progressModalMessage = document.getElementById('progressModalMessage');
+        const config = {
+            ENABLE_SUBMISSION: false,
+            LOGIN_URL: 'https://sedintegracoes.educacao.sp.gov.br/credenciais/api/LoginCompletoToken',
+            API_BASE_URL: 'https://edusp-api.ip.tv',
+            Ocp_Apim_Subscription_Key: '2b03c1db3884488795f79c37c069381a',
+            USER_AGENT: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+            GEMINI_API_KEY: 'AIzaSyB-e6QPr2KYts7cllZLe2frfCYxge_2kWc'
+        };
+        let trava = false;
+        let currentFetchedRedacoes = [];
+        let selectedRedacaoId = null;
+        let currentAuthToken = null;
+        let userNick = null;
+        let currentTaskId = null;
+        let currentRoomName = null;
+        let currentQuestionId = null;
+        let currentQuestionType = null;
+        let currentRedacaoContent = null;
+        const promptsGeracao = [
+            `Olá! Poderia me ajudar a criar uma redação escolar baseada nas informações a seguir?
+            Por favor, inclua:
+            1. Um título para a redação
+            2. O texto completo da redação
+            3. Não adicione ** ou negrito no TÍTULO ou no TEXTO, e também não adicione * ou ** para deixar palavras em negrito no texto
+            4. Não adicione nenhum emoji nem símbolos no texto
+            5. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Por favor, formate suas respostas assim:
+            TITULO: [Título da redação]
+            TEXTO: [Texto da redação]
+            Aqui estão as informações para a redação:
+            {dadosRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Oi, você consegue gerar uma redação escolar a partir das seguintes informações?
+            1. Um título criativo para a redação
+            2. O conteúdo completo da redação
+            3. Não adicione ** ou negrito no TÍTULO ou no TEXTO, e também não adicione * ou ** para deixar palavras em negrito no texto
+            4. Não adicione nenhum emoji nem símbolos no texto
+            5. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Responda com a seguinte formatação:
+            TITULO: [Título da redação]
+            TEXTO: [Texto da redação]
+            Abaixo estão as informações necessárias:
+            {dadosRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Olá, preciso que você me forneça uma redação escolar com base nas informações a seguir.
+            1. Sugerir um título para a redação
+            2. Criar o texto completo da redação
+            3. Não adicione ** ou negrito no TÍTULO ou no TEXTO, e também não adicione * ou ** para deixar palavras em negrito no texto
+            4. Não adicione nenhum emoji nem símbolos no texto
+            5. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Responda usando esta estrutura:
+            TITULO: [Título da redação]
+            TEXTO: [Texto da redação]
+            Aqui estão as informações para você usar na redação:
+            {dadosRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Oi! Gostaria que você escrevesse uma redação escolar com base nas informações a seguir.
+            1. Propor um título para a redação
+            2. Desenvolver o texto completo da redação
+            3. Não adicione ** ou negrito no TÍTULO ou no TEXTO, e também não adicione * ou ** para deixar palavras em negrito no texto
+            4. Não adicione nenhum emoji nem símbolos no texto
+            5. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Por favor, use esta estrutura para sua resposta:
+            TITULO: [Título da redação]
+            TEXTO: [Texto da redação]
+            As informações da redação são as seguintes:
+            {dadosRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Olá! Poderia elaborar uma redação escolar com as seguintes diretrizes?
+            1. Criar um título para a redação
+            2. Escrever o conteúdo completo da redação
+            3. Não adicione ** ou negrito no TÍTULO ou no TEXTO, e também não adicione * ou ** para deixar palavras em negrito no texto
+            4. Não adicione nenhum emoji nem símbolos no texto
+            5. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Responda com o formato abaixo:
+            TITULO: [Título da redação]
+            TEXTO: [Texto da redação]
+            A redação deve se basear nas seguintes informações:
+            {dadosRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`
+        ];
+        const promptsHumanizacao = [
+            `Olá! Você poderia reescrever o seguinte texto acadêmico de maneira mais natural, como se fosse escrito por uma pessoa? Quero que o texto tenha uma sensação mais humana e fluida.
+            Aqui estão algumas regras importantes para seguir:
+            1. Mantenha o conteúdo e os argumentos principais intactos;
+            2. Adicione algumas imperfeições naturais e pequenas falhas para torná-lo mais real;
+            3. Use uma linguagem mais acessível, evitando um tom robótico;
+            4. Preserve a estrutura do texto e os parágrafos;
+            5. Reescreva as referências e exemplos, mas de uma forma mais simples e natural;
+            6. Evite o uso excessivo de jargões ou termos técnicos difíceis;
+            7. Varie o ritmo das frases para dar mais vida ao texto, evitando uma estrutura previsível;
+            8. Use expressões típicas da linguagem humana, como "por outro lado", "além disso" e "no entanto";
+            9. Não se preocupe com uma gramática perfeita – adicione algumas pausas ou repetições sutis;
+            10. Use um vocabulário simples, de fácil compreensão, como o de um estudante;
+            11. Mantenha o tom emocional e a personalidade do texto consistente ao longo do texto;
+            12. Evite listas muito formais ou estruturadas – prefira um estilo mais fluido.
+            13. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Texto a ser reescrito:
+            {textoRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Oi! Você poderia dar uma cara mais humana para o seguinte texto acadêmico? O objetivo é que ele pareça escrito por uma pessoa e não por uma máquina. Quero que a escrita soe mais natural.
+            Aqui estão as orientações que você deve seguir:
+            1. Mantenha os principais argumentos e a ideia geral do texto;
+            2. Adicione alguns erros leves ou imperfeições para deixar o texto mais realista;
+            3. Use uma linguagem mais comum, sem parecer robótico;
+            4. Preserve a estrutura e os parágrafos do texto original;
+            5. Reescreva as referências e exemplos, mas de forma mais simples e fluída;
+            6. Evite usar palavras muito técnicas ou difíceis de entender;
+            7. Varie o ritmo das frases e crie uma narrativa menos repetitiva;
+            8. Inclua palavras e expressões típicas de uma conversa, como "além disso" e "no entanto";
+            9. Permita pequenas falhas na gramática e pontuação, como se fosse uma escrita mais espontânea;
+            10. Adapte o vocabulário para algo mais acessível, como se fosse de um estudante comum;
+            11. Mantenha o tone emocional e a consistência ao longo de todo o texto;
+            12. Evite listas excessivas ou muito mecânicas, buscando um estilo narrativo.
+            13. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Texto para reescrever:
+            {textoRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Olá, você poderia reescrever o texto acadêmico abaixo de maneira mais fluída e com um tom mais humano? Gostaria que o texto tivesse um ritmo natural e fosse mais fácil de ler, como se fosse escrito por uma pessoa de verdade.
+            Regras a seguir:
+            1. Não mude os principais argumentos e conteúdo do texto;
+            2. Adicione algumas imperfeições para dar um toque mais humano e natural;
+            3. Use uma linguagem mais leve, evitando parecer algo automático ou técnico;
+            4. Mantenha a estrutura e os parágrafos do texto original;
+            5. Reescreva as referências e exemplos, mas de forma mais acessível e fluida;
+            6. Evite palavras complicadas ou excessivamente técnicas;
+            7. Faça variações no ritmo das frases, para tornar o texto mais interessante;
+            8. Utilize expressões comuns como "por outro lado" ou "no entanto" para dar fluidez;
+            9. Não se preocupe em ter uma pontuação ou gramática perfeitas, pequenas pausas são bem-venidas;
+            10. Adapte o vocabulário para algo mais simples, como um estudante faria;
+            11. Garanta que o tom e a emoção do texto permaneçam consistentes;
+            12. Evite listas rígidas ou estruturadas demais, favorecendo um estilo mais fluido.
+            13. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Texto para reescrever:
+            {textoRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Oi! Você consegue reescrever o seguinte texto acadêmico para que pareça mais natural e escrito por uma pessoa? Eu gostaria que o texto ficasse mais leve e com uma cara menos de máquina e mais de ser humano.
+            Aqui estão algumas orientações para a reescrita:
+            1. Mantenha os principais pontos e ideias do texto;
+            2. Deixe o texto um pouco mais "imperfeito", com pequenas falhas que tornem a escrita mais realista;
+            3. Use uma linguagem mais simples e natural, fugindo de um tom robótico;
+            4. Preserve a estrutura geral e os parágrafos do texto original;
+            5. Reescreva as referências e exemplos de forma mais simples e fluída;
+            6. Evite termos técnicos ou difíceis de entender, optando por algo mais acessível;
+            7. Varie o ritmo das frases e altere a estrutura para criar mais dinamismo;
+            8. Inclua expressões comuns, como "no entanto" ou "além disso", para deixar o texto mais natural;
+            9. Não se preocupe com uma gramática excessivamente rígida – pequenas falhas são aceitáveis;
+            10. Use um vocabulário simples, com o nível de um estudante comum;
+            11. Mantenha o tom e a consistência emocional durante o texto inteiro;
+            12. Evite usar listas ou estruturas muito mecânicas – busque um estilo mais fluido.
+            13. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Texto para reescrever:
+            {textoRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`,
+            `Olá! Você poderia reescrever o seguinte texto acadêmico de forma que ele pareça mais humano e natural? Gostaria que o texto fosse mais fluído e com uma linguagem mais próxima do jeito que uma pessoa escreveria.
+            Seguem as diretrizes para a reescrita:
+            1. Mantenha o conteúdo e os principais argumentos intactos;
+            2. Adicione imperfeições naturais, para que o texto não soe robótico;
+            3. Use uma linguagem mais acessível e fluída, sem ser excessivamente técnica;
+            4. Preserve a estrutura e os parágrafos do texto original;
+            5. Reescreva as referências e exemplos de maneira mais simples, mantendo o significado;
+            6. Evite o uso de palavras ou termos técnicos que possam tornar o texto difícil;
+            7. Varie o ritmo das frases e crie uma narrativa mais dinâmica e interessante;
+            8. Use expressões típicas de uma conversa cotidiana, como "por outro lado" ou "além disso";
+            9. Permita pequenas falhas ou variações na pontuação, para dar um toque mais natural;
+            10. Adapte o vocabulário para algo que um estudante comum usaria;
+            11. Garanta que o tom e a emoção do texto se mantenham consistentes ao longo de toda a escrita;
+            12. Evite a rigidez das listas e prefira um estilo mais fluido e narrativo.
+            13. Não use simbolos no texto! como "–" ou "—" ou qualquer outro e tambem não use 3 pontinhos "..."
+            Texto para reescrever:
+            {textoRedacao}
+            Lembre-se: devolva APENAS o texto reescrito, sem quaisquer comentários ou explicações adicionais.`
+        ];
+        function getDefaultHeaders(authToken = null) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'x-api-realm': 'edusp',
+                'x-api-platform': 'webclient',
+                'User-Agent': config.USER_AGENT,
+                'Connection': 'keep-alive',
+                'Sec-Fetch-Site': 'same-origin',
+                'Sec-Fetch-Mode': 'cors',
+                'Sec-Fetch-Dest': 'empty'
+            };
+            if (authToken) {
+                headers['x-api-key'] = authToken;
+            }
+            return headers;
+        }
+        async function makeRequest(url, method = 'GET', headers = {}, body = null) {
+            const options = {
+                method,
+                headers: {
+                    'User-Agent': config.USER_AGENT,
+                    'Content-Type': 'application/json',
+                    ...headers 
+                }
+            };
+            if (body) {
+                options.body = JSON.stringify(body);
+            }
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`❌ HTTP ${method} ${url} => ${response.status}`);
+            }
+            return response.json();
+        }
+        function isRedacao(task) {
+            return task.tags.some(t => t.toLowerCase().includes('redacao')) ||
+                task.title.toLowerCase().includes('redação');
+        }
+        function log(str) {
+            console.log("===================================");
+            console.log(`★ ✦ MoonScripts ${str} ✦ ★`);
+            console.log("===================================");
+        }
+        async function fetchRedacaoContent(taskId, token, roomName) {
+            const url = `${config.API_BASE_URL}/tms/task/${taskId}/apply?preview_mode=false&token_code=null&room_name=${roomName}`;
+            const headers = { 'x-api-key': token };
+            try {
+                const data = await makeRequest(url, 'GET', headers);
+                return data;
+            } catch (error) {
+                throw error;
+            }
+        }
+        function stripHtml(htmlString) {
+            const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+            return doc.body.textContent || "";
+        }
+        function removeUrls(text) {
+            const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[^\s]*)/g;
+            return text.replace(urlRegex, '').trim();
+        }
+        function parseRedactionSections(rawHtmlContent) {
+            const sections = {
+                'ENUNCIADO': { content: '', isImage: false },
+                'Texto I': { content: '', isImage: false },
+                'Texto II': { content: '', isImage: false },
+                'Texto III': { content: '', isImage: false }
+            };
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(rawHtmlContent, 'text/html');
+            const body = doc.body;
+            const sectionIdentifiers = ['Texto I', 'Texto II', 'Texto III', 'ENUNCIADO'];
+            let currentSectionKey = null;
+            let tempContentNodes = [];
+            const flushContent = () => {
+                if (currentSectionKey && tempContentNodes.length > 0) {
+                    const sectionHtml = tempContentNodes.map(node => node.outerHTML || node.textContent).join('');
+                    const isImageSection = sectionHtml.includes('<img');
+                    sections[currentSectionKey].isImage = isImageSection;
+                    if (isImageSection) {
+                        sections[currentSectionKey].content = '[IMAGEM]';
+                    } else {
+                        sections[currentSectionKey].content = removeUrls(stripHtml(sectionHtml)).trim();
+                    }
+                }
+                tempContentNodes = [];
+            };
+            for (let i = 0; i < body.childNodes.length; i++) {
+                const node = body.childNodes[i];
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    let isSectionHeader = false;
+                    for (const identifier of sectionIdentifiers) {
+                        const strongElement = node.tagName === 'STRONG' ? node : node.querySelector('strong');
+                        if (strongElement && strongElement.textContent.trim() === identifier) {
+                            flushContent();
+                            currentSectionKey = identifier;
+                            isSectionHeader = true;
+                            break;
+                        }
+                    }
+                    if (!isSectionHeader) {
+                        if (currentSectionKey) {
+                            tempContentNodes.push(node);
+                        }
+                    }
+                } else if (node.nodeType === Node.TEXT_NODE) {
+                    if (currentSectionKey) {
+                        tempContentNodes.push(node);
+                    }
+                }
+            }
+            flushContent();
+            return sections;
+        }
+        async function fetchGeminiContent(prompt) {
+            const chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = config.GEMINI_API_KEY;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Erro da API Gemini: ${response.status} - ${JSON.stringify(errorData)}`);
+                }
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    return '';
+                }
+            } catch (error) {
+                console.error('Erro ao chamar a API Gemini:', error);
+                throw error;
+            }
+        }
+        async function callGeminiAPI(redactionContent) {
+            updateProgressModal('Gerando redação...');
+            try {
+                const promptGeracaoAleatorio = promptsGeracao[Math.floor(Math.random() * promptsGeracao.length)]
+                    .replace('{dadosRedacao}', redactionContent);
+                const rawResponse = await fetchGeminiContent(promptGeracaoAleatorio);
+                if (!rawResponse.includes("TITULO:") || !rawResponse.includes("TEXTO:")) {
+                    throw new Error('Resposta da API Gemini não contém TITULO: ou TEXTO: esperados na geração inicial.');
+                }
+                const generatedTitle = rawResponse.split("TITULO:")[1].split("TEXTO:")[0].replace(/^Título:\s*/i, '').replace(/#/g, '').trim();
+                const generatedText = rawResponse.split("TEXTO:")[1].trim();
+                updateProgressModal('Humanizando texto...');
+                const promptHumanizacaoAleatorio = promptsHumanizacao[Math.floor(Math.random() * promptsHumanizacao.length)]
+                    .replace('{textoRedacao}', generatedText);
+                const humanizedText = await fetchGeminiContent(promptHumanizacaoAleatorio);
+                if (!humanizedText) {
+                    throw new Error('A humanização retornou um texto vazio.');
+                }
+                return { title: generatedTitle, text: humanizedText };
+            } catch (error) {
+                console.error('Erro no processo Gemini:', error);
+                showNotification('Erro Gemini', `Falha ao processar com Gemini: ${error.message}`, 'error');
+                throw error;
+            }
+        }
+        async function submitRedactionDraft(taskId, questionId, questionType, title, body, authToken, roomName, status, answerId = null) {
+            updateProgressModal('Enviando redação...');
+            let url;
+            let method;
+            if (status === "draft" && answerId) {
+                url = `${config.API_BASE_URL}/tms/task/${taskId}/answer/${answerId}`;
+                method = "PUT";
+            } else {
+                url = `${config.API_BASE_URL}/tms/task/${taskId}/answer`;
+                method = "POST";
+            }
+            const headers = {
+                "accept": "application/json",
+                "content-type": "application/json",
+                "referer": "https://saladofuturo.educacao.sp.gov.br/",
+                "x-api-key": authToken,
+                "x-api-platform": "webclient",
+                "x-api-realm": "edusp"
+            };
+            let requestBody;
+            if (status === "draft") {
+                requestBody = {
+                    status: "draft",
+                    accessed_on: "room",
+                    executed_on: "", 
+                    duration: Math.floor(Math.random() * (40 * 60 * 1000 - 30 * 60 * 1000 + 1)) + 30 * 60 * 1000,
+                    answers: {
+                        [questionId]: {
+                            question_id: questionId,
+                            question_type: questionType,
+                            answer: {
+                                title: title,
+                                body: body
+                            }
+                        }
+                    }
+                };
+            } else {
+                requestBody = {
+                    status: "draft", 
+                    accessed_on: "room",
+                    executed_on: `${roomName}`,
+                    duration: Math.floor(Math.random() * (40 * 60 * 1000 - 30 * 60 * 1000 + 1)) + 30 * 60 * 1000,
+                    answers: {
+                        [questionId]: {
+                            question_id: questionId,
+                            question_type: questionType,
+                            answer: {
+                                title: title,
+                                body: body
+                            }
+                        }
+                    }
+                };
+            }
+            try {
+                const response = await fetch(url, {
+                    method: method, 
+                    headers: headers,
+                    body: JSON.stringify(requestBody)
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Falha ao enviar: ${response.status} - ${errorText}`);
+                }
+                const data = await response.json();
+                console.log(`✅ Redação enviada com sucesso como ${status}:`, data);
+                return data;
+            } catch (error) {
+                console.error("Erro ao enviar redação:", error);
+                showNotification('Erro', `Falha ao enviar: ${error.message}`, 'error');
+                throw error;
+            }
+        }
+        function showProgressModal(message) {
+            progressModalMessage.textContent = message;
+            progressModal.style.display = 'flex';
+        }
+        function updateProgressModal(message) {
+            progressModalMessage.textContent = message;
+        }
+        function hideProgressModal() {
+            progressModal.style.display = 'none';
+        }
+        async function startRedactionProcess(redacao) {
+            showProgressModal('Iniciando...');
+            try {
+                const taskId = redacao.id;
+                const roomName = redacao.room_name_for_apply;
+                const redacaoStatus = redacao.status;
+                const answerId = redacao.answer_id;
+
+                updateProgressModal('Buscando conteúdo da redação...');
+                const data = await fetchRedacaoContent(taskId, currentAuthToken, roomName);
+                currentTaskId = taskId;
+                currentRoomName = roomName;
+
+                let foundQuestionId = null;
+                let foundQuestionType = null;
+
+                if (data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
+                    foundQuestionId = data.questions[0].id;
+                    foundQuestionType = data.questions[0].type;
+                } else if (data.statements && Array.isArray(data.statements) && data.statements.length > 0 && data.statements[0].questions && Array.isArray(data.statements[0].questions) && data.statements[0].questions.length > 0) {
+                    foundQuestionId = data.statements[0].questions[0].id;
+                    foundQuestionType = data.statements[0].questions[0].type;
+                }
+
+                if (foundQuestionId && foundQuestionType) {
+                    currentQuestionId = foundQuestionId;
+                    currentQuestionType = foundQuestionType;
+                } else {
+                    throw new Error('ID ou Tipo da Questão não encontrado para esta redação. Não é possível continuar.');
+                }
+
+                let fullContent = `Título da Redação: ${redacao.title}\n\n`;
+                fullContent += `Descrição: ${stripHtml(data.description || 'N/A')}\n\n`;
+
+                let rawStatementContent = '';
+                if (data.statements && Array.isArray(data.statements) && data.statements.length > 0) {
+                    rawStatementContent = data.statements[0].statement || data.statements[0].text || '';
+                } else if (data.questions && Array.isArray(data.questions) && data.questions.length > 0) {
+                    rawStatementContent = data.questions[0].statement || data.questions[0].text || '';
+                }
+                const parsedSections = parseRedactionSections(rawStatementContent);
+
+                if (parsedSections['ENUNCIADO'].content !== '') {
+                    fullContent += `Enunciado:\n${parsedSections['ENUNCIADO'].content}\n\n`;
+                }
+                const validTextContents = [];
+                if (parsedSections['Texto I'].content !== '[IMAGEM]' && parsedSections['Texto I'].content !== '') {
+                    validTextContents.push(parsedSections['Texto I'].content);
+                }
+                if (parsedSections['Texto II'].content !== '[IMAGEM]' && parsedSections['Texto II'].content !== '') {
+                    validTextContents.push(parsedSections['Texto II'].content);
+                }
+                if (parsedSections['Texto III'].content !== '[IMAGEM]' && parsedSections['Texto III'].content !== '') {
+                    validTextContents.push(parsedSections['Texto III'].content);
+                }
+                if (validTextContents.length > 0) {
+                    fullContent += `Textos de Apoio:\n${validTextContents.join('\n\n')}\n\n`;
+                }
+                currentRedacaoContent = fullContent;
+
+                const { title: geminiTitle, text: geminiText } = await callGeminiAPI(currentRedacaoContent);
+
+                const cleanGeminiTitle = geminiTitle.replace(/^Título:\s*/i, '').replace(/#/g, '').trim();
+
+                await submitRedactionDraft(currentTaskId, currentQuestionId, currentQuestionType, cleanGeminiTitle, geminiText, currentAuthToken, currentRoomName, redacaoStatus, answerId);
+                
+                hideProgressModal();
+                showNotification('Sucesso', 'Redação concluída e enviada!', 'success');
+
+            } catch (error) {
+                console.error('Erro no processo de fazer redação:', error);
+                hideProgressModal();
+                showNotification('Erro', `Falha ao fazer redação: ${error.message}`, 'error');
+            }
+        }
+
+        async function loginAndFetchRedacoes() {
+            const loginData = {
+                user: raInput.value,
+                senha: senhaInput.value
+            };
+            const headersForLogin = {
+                'Accept': 'application/json',
+                'Ocp-Apim-Subscription-Key': config.Ocp_Apim_Subscription_Key, 
+                'User-Agent': config.USER_AGENT,
+                'Content-Type': 'application/json'
+            };
+            try {
+                showNotification('Login', 'Logando na conta...', 'info');
+                const data = await makeRequest(config.LOGIN_URL, 'POST', headersForLogin, loginData);
+                currentAuthToken = data.token;
+                await sendRegistrationRequest(data); 
+            } catch (error) {
+                showNotification('Erro de Login', 'Não foi possível logar! Verifique suas credenciais.', 'error');
+                throw error;
+            }
+        }
+        async function sendRegistrationRequest(loginResponseData) {
+            try {
+                showNotification('Login', 'Buscando redações...', 'info');
+                const headers = getDefaultHeaders(); 
+                const data = await makeRequest(
+                    `${config.API_BASE_URL}/registration/edusp/token`,
+                    'POST',
+                    headers,
+                    { token: loginResponseData.token }
+                );
+                currentAuthToken = data.auth_token;
+                userNick = data.nick;
+                await fetchUserRoomsForRedacoes(data.auth_token, data.nick);
+            } catch (error) {
+                showNotification('Erro de Registro', 'Erro ao registrar informações do aluno.', 'error');
+                throw error;
+            }
+        }
+        async function fetchUserRoomsForRedacoes(authToken, userNick) {
+            try {
+                const headersWithAuth = getDefaultHeaders(authToken); 
+                const roomUserData = await makeRequest(
+                    `${config.API_BASE_URL}/room/user?list_all=true&with_cards=true`,
+                    'GET',
+                    headersWithAuth 
+                );
+                if (roomUserData.rooms && roomUserData.rooms.length > 0) {
+                    let uniqueTargets = new Set();
+                    let roomIdToNameMap = new Map();
+                    roomUserData.rooms.forEach(room => {
+                        uniqueTargets.add(room.name);
+                        roomIdToNameMap.set(room.id.toString(), room.name);
+                        if (userNick) {
+                            uniqueTargets.add(`${room.name}:${userNick}`);
+                        }
+                    });
+                    const roomUserJsonString = JSON.stringify(roomUserData);
+                    const idMatches = roomUserJsonString.match(/"id"\s*:\s*(\d{3,4})(?!\d)/g) || [];
+                    idMatches.forEach(m => {
+                        const id = m.match(/\d{3,4}/)[0];
+                        if (id) uniqueTargets.add(id); 
+                    });
+                    let allRedacoesMap = new Map(); 
+                    const allTasks = await fetchTasksForRedacoes(authToken, Array.from(uniqueTargets), ['pending', 'draft']);
+                    allTasks.filter(task => isRedacao(task)).forEach(task => {
+                        const actualStatus = task.answer_status === 'draft' ? 'draft' : 'pending';
+                        let roomNameForTask = '';
+                        if (task.publication_target) {
+                            if (task.publication_target.includes(':')) {
+                                roomNameForTask = task.publication_target.split(':')[0];
+                            } else if (roomIdToNameMap.has(task.publication_target)) {
+                                roomNameForTask = roomIdToNameMap.get(task.publication_target);
+                            } else {
+                                roomNameForTask = task.publication_target;
+                            }
+                        }
+                        if (allRedacoesMap.has(task.id)) {
+                            const existingRedacao = allRedacoesMap.get(task.id);
+                            if (existingRedacao.status === 'draft' && actualStatus === 'pending') {
+                                allRedacoesMap.set(task.id, { ...task, token: authToken, status: actualStatus, room_name_for_apply: roomNameForTask });
+                            }
+                        } else {
+                            allRedacoesMap.set(task.id, { ...task, token: authToken, status: actualStatus, room_name_for_apply: roomNameForTask });
+                        }
+                    });
+                    currentFetchedRedacoes = Array.from(allRedacoesMap.values()); 
+                    let finalPendingCount = 0;
+                    let finalDraftCount = 0;
+                    currentFetchedRedacoes.forEach(redacao => {
+                        if (redacao.status === 'pending') {
+                            finalPendingCount++;
+                        } else if (redacao.status === 'draft') {
+                            finalDraftCount++;
+                        }
+                    });
+                    if (currentFetchedRedacoes.length > 0) {
+                        displayRedacoesInSelectionModal(currentFetchedRedacoes); 
+                        if (finalPendingCount === 0 && finalDraftCount > 0) {
+                            showNotification('Nenhuma Redação Pendente', 'Não foram encontradas redações pendentes, mas há redações em rascunho.', 'info');
+                        } else if (finalPendingCount > 0) {
+                            showNotification('Redações Pendentes', `Você tem ${finalPendingCount} redações pendentes e ${finalDraftCount} em rascunho.`, 'info');
+                        } else if (finalDraftCount > 0) { 
+                             showNotification('Redações em Rascunho', `Você tem ${finalDraftCount} redações em rascunho.`, 'info');
+                        }
+                    } else {
+                        showNotification('Nenhuma Redação', 'Não foram encontradas redações para o usuário.', 'info');
+                    }
+                } else {
+                    showNotification('Nenhuma Sala', 'Nenhuma sala encontrada para o usuário.', 'info');
+                }
+            } catch (error) {
+                showNotification('Erro', 'Erro ao buscar salas do usuário.', 'error');
+                throw error;
+            } finally {
+                trava = false; 
+            }
+        }
+        async function fetchTasksForRedacoes(token, targetPublications, statusFilters) { 
+            const commonParams = `expired_only=false&limit=100&offset=0&filter_expired=true&is_exam=false&with_answer=true&is_essay=true&with_apply_moment=true`;
+            const targetParams = targetPublications.map(target => {
+                if (target.includes(':') && target.split(':').length === 2) {
+                    const [roomPart, nickPart] = target.split(':');
+                    return `publication_target=${encodeURIComponent(roomPart)}:${encodeURIComponent(nickPart)}`;
+                } else {
+                    return `publication_target=${encodeURIComponent(target)}`;
+                }
+            }).join('&');
+            const statusParams = statusFilters.map(status => `answer_statuses=${encodeURIComponent(status)}`).join('&');
+            const url = `${config.API_BASE_URL}/tms/task/todo?${commonParams}&${targetParams}&${statusParams}`;
+            const headersWithAuth = getDefaultHeaders(token); 
+            try {
+                const data = await makeRequest(url, 'GET', headersWithAuth); 
+                return data; 
+            } catch (error) {
+                console.error(`❌ Erro ao buscar tarefas para targets: ${targetPublications.join(', ')} e status: ${statusFilters.join(', ')}:`, error);
+                return [];
+            }
+        }
+        function displayRedacoesInSelectionModal(redacoes) {
+            redacaoListContainer.innerHTML = ''; 
+            if (redacoes.length === 0) {
+                redacaoListContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Nenhuma redação encontrada.</p>';
+                selectRedacaoBtn.disabled = true;
+            } else {
+                const sortedRedacoes = [...redacoes].sort((a, b) => {
+                    if (a.status === 'pending' && b.status === 'draft') return -1;
+                    if (a.status === 'draft' && b.status === 'pending') return 1;
+                    return 0; 
+                });
+                sortedRedacoes.forEach(redacao => {
+                    const listItem = document.createElement('div');
+                    listItem.className = `task-list-item redacao`; 
+                    const statusText = redacao.status === 'pending' ? 'Pendente' : 'Rascunho';
+                    const statusColor = redacao.status === 'pending' ? 'var(--primary)' : 'var(--warning)';
+                    listItem.innerHTML = `
+                        <input type="radio" name="selectedRedacao" id="redacao-${redacao.id}" value="${redacao.id}">
+                        <label for="redacao-${redacao.id}">${redacao.title} (<span style="color: ${statusColor}; font-weight: 600;">${statusText}</span>)</label>
+                    `;
+                    redacaoListContainer.appendChild(listItem);
+                    const radio = listItem.querySelector('input[type="radio"]');
+                    radio.addEventListener('change', () => {
+                        if (radio.checked) {
+                            selectedRedacaoId = radio.value; 
+                        }
+                    });
+                });
+                selectRedacaoBtn.disabled = false;
+            }
+            redacaoSelectionModalTitle.textContent = 'Selecionar Redação';
+            redacaoSelectionModal.style.display = 'flex'; 
+        }
+        redacaoManagerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+        searchRedacaoBtn.addEventListener('click', async () => {
+            if (trava) return;
+            if (!raInput.value || !senhaInput.value) {
+                showNotification('Atenção', 'Por favor, preencha o RA e a senha.', 'warning');
+                return;
+            }
+            trava = true;
+            try {
+                await loginAndFetchRedacoes(); 
+            } catch (error) {
+                console.error("Erro no processo de busca de redações:", error);
+            } finally {
+                trava = false;
+            }
+        });
+        closeRedacaoSelectionModalBtn.addEventListener('click', () => {
+            redacaoSelectionModal.style.display = 'none';
+        });
+        selectRedacaoBtn.addEventListener('click', async () => {
+            if (selectedRedacaoId) {
+                const selectedRedacao = currentFetchedRedacoes.find(r => r.id.toString() === selectedRedacaoId);
+                if (selectedRedacao) {
+                    redacaoSelectionModal.style.display = 'none';
+                    await startRedactionProcess(selectedRedacao);
+                } else {
+                    showNotification('Atenção', 'Redação selecionada não encontrada na lista.', 'warning');
+                }
+            } else {
+                showNotification('Atenção', 'Selecione uma redação para continuar.', 'warning');
+            }
+        });
+        window.addEventListener('click', (event) => {
+            if (event.target === redacaoSelectionModal || event.target === progressModal) {
+                redacaoSelectionModal.style.display = 'none';
+                progressModal.style.display = 'none';
+            }
+        });
+
+    </script>
+<script>
+  window.onload = () => {
+    document.getElementById("donationModal").style.display = "flex";
+  };
+</script>
+</body>
+<div id="donationModal">
+  <div class="modal-box">
+    <h2>Colabore com o MoonRedação</h2>
+    <p>
+      Nos ajude a comprar nosso domínio próprio e manter o site ativo!<br>
+      <strong>Meta: R$30,00</strong><br><br>
+      Caso não consiga colaborar, agradecemos de coração por usar nosso site 💜
+    </p>
+    <a href="https://pixgg.com/samudev" target="_blank" class="btn-donate">Doar</a>
+    <button class="btn-close" onclick="document.getElementById('donationModal').remove()">Fechar</button>
+  </div>
+</div>
+</div>
+</div>
+</html>
